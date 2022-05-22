@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32516.85
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EpzNotDead.Server", "EpzNotDead\Server\EpzNotDead.Server.csproj", "{6DC3F0EC-8883-4FD4-9C97-6E84A4620931}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EpzNotDead.Server", "EpzNotDead\Server\EpzNotDead.Server.csproj", "{6DC3F0EC-8883-4FD4-9C97-6E84A4620931}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EpzNotDead.Client", "EpzNotDead\Client\EpzNotDead.Client.csproj", "{4F16BFB8-8472-4E85-B57C-241AB1B89FAF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EpzNotDead.Client", "EpzNotDead\Client\EpzNotDead.Client.csproj", "{4F16BFB8-8472-4E85-B57C-241AB1B89FAF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EpzNotDead.Shared", "EpzNotDead\Shared\EpzNotDead.Shared.csproj", "{C609C999-4315-455F-A94C-0E6159B58AFF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EpzNotDead.Shared", "EpzNotDead\Shared\EpzNotDead.Shared.csproj", "{C609C999-4315-455F-A94C-0E6159B58AFF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EpzNotDead.Infrastructure", "EpzNotDead.Infrastructure\EpzNotDead.Infrastructure.csproj", "{534C69F8-6210-4432-88B8-3254F5728D68}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EpzNotDead.Infrastructure", "EpzNotDead.Infrastructure\EpzNotDead.Infrastructure.csproj", "{534C69F8-6210-4432-88B8-3254F5728D68}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -14,23 +14,18 @@ namespace EpzNotDead.Infrastructure.Configuration
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Entity<Link>().HasData(new Link
+            var news = new News
             {
+                Content = "Test content",
                 Created = DateTime.Now,
-                Edited = DateTime.Now,
                 Id = Guid.NewGuid(),
-                Title = "Facebook",
-                Url = "https://www.facebook.com/elektropunkz"
-            });
-            modelBuilder.Entity<Link>().HasData(new Link
-            {
-                Created = DateTime.Now,
-                Edited = DateTime.Now,
-                Id = Guid.NewGuid(),
-                Title = "Telegram channel",
-                Url = "https://t.me/epznotdead"
-            });
+                ShortContent = "Short",
+                Title = "Test news",
+            };
+            var fbLink = new Link("https://www.facebook.com/elektropunkz", "Facebook", news.Id);
+            var tLink = new Link("https://t.me/epznotdead", "Telegram channel", news.Id);
+            modelBuilder.Entity<News>().HasData(news);
+            modelBuilder.Entity<Link>().HasData(fbLink);
         }
 
         public DbSet<Link> Links { get; set; }
