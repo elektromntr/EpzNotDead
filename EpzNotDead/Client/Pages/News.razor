@@ -14,7 +14,11 @@
 }
 else
 {
-    <table class="table">
+    foreach(var item in news)
+    {
+        <EpzNotDead.Client.Pages.Components.Lead Article="@item" />
+    }
+    @*<table class="table">
         <thead>
             <tr>
                 <th>Id</th>
@@ -34,7 +38,7 @@ else
                 </tr>
             }
         </tbody>
-    </table>
+    </table>*@
 }
 
 @code {

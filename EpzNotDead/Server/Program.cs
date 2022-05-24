@@ -1,5 +1,4 @@
 using EpzNotDead.Infrastructure.Configuration;
-using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

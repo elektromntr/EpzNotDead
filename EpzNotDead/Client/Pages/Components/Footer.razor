@@ -1,0 +1,18 @@
+﻿@using EpzNotDead.Client.Pages.Components.Bases
+@inherits FooterBase
+
+<small>
+@if (Edited is not null)
+    {
+    <span>Wrzucone: @Edited?.ToString("yyyy-MM-dd_hh:mm")</span>
+}
+else
+{
+    <span>Wrzucone: @Created.ToString("yyyy-MM-dd_hh:mm")</span>
+}
+ | <button @onclick="() => (GivePlus(Id))">+@Score</button>
+</small>
+
+@code {
+    
+}

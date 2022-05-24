@@ -1,0 +1,19 @@
+﻿@using EpzNotDead.Client.Pages.Components.Bases
+@inherits LeadBase
+
+@if (Article is null)
+{
+    <span>Chwila..</span>
+}
+else
+{
+<h1>@Article.Title</h1>
+<Footer Id="@Article.Id" Created="@Article.Created" Edited="@Article?.Edited" Score="@Article.Score"/>
+<p>
+    @Article.ShortContent
+</p>
+}
+
+@code {
+    
+}

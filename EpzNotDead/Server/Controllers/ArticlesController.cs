@@ -26,5 +26,15 @@ namespace EpzNotDead.Server.Controllers
 
             return Ok(result);
         }
+
+        [HttpPut]
+        [Route("ScoreUp/{id:Guid}")]
+        public async Task<ActionResult> ScoreUp(Guid id)
+        {
+            var scoring = _db.News.FirstOrDefault(n => n.Id.Equals(id));
+            scoring.Score += 1;
+            _ = await _db.SaveChangesAsync();
+            return NoContent();
+        }
     }
 }
