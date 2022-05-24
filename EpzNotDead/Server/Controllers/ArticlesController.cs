@@ -22,7 +22,7 @@ namespace EpzNotDead.Server.Controllers
         [Route("News")]
         public async Task<ActionResult> GetNews()
         {
-            var result = _db.News.ToList();
+            var result = _db.Posts.ToList();
 
             return Ok(result);
         }
@@ -31,10 +31,18 @@ namespace EpzNotDead.Server.Controllers
         [Route("ScoreUp/{id:Guid}")]
         public async Task<ActionResult> ScoreUp(Guid id)
         {
-            var scoring = _db.News.FirstOrDefault(n => n.Id.Equals(id));
-            scoring.Score += 1;
-            _ = await _db.SaveChangesAsync();
-            return NoContent();
+            try
+            {
+                var scoring = _db.Posts.FirstOrDefault(n => n.Id.Equals(id));
+                scoring.Score += 1;
+                _ = await _db.SaveChangesAsync();
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+                //logger
+                return BadRequest(e.Message);
+            }
         }
     }
 }

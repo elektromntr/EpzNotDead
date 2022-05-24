@@ -42,10 +42,10 @@ else
 }
 
 @code {
-    private EpzNotDead.Infrastructure.Entities.News[]? news;
+    private EpzNotDead.Infrastructure.Entities.Post[]? news;
 
     protected override async Task OnInitializedAsync()
     {
-        news = await Http.GetFromJsonAsync<EpzNotDead.Infrastructure.Entities.News[]>("Articles/News");
+        news = await Http.GetFromJsonAsync<EpzNotDead.Infrastructure.Entities.Post[]>("Articles/News");
     }
 }
