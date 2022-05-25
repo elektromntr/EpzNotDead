@@ -4,13 +4,13 @@
 <small>
 @if (Edited is not null)
     {
-    <span>Wrzucone: @Edited?.ToString("yyyy-MM-dd_hh:mm")</span>
+    <code>Wrzucone: @Edited?.ToString("yyyy-MM-dd_hh:mm")</code>
 }
 else
 {
-    <span>Wrzucone: @Created.ToString("yyyy-MM-dd_hh:mm")</span>
+    <code>Wrzucone: @Created.ToString("yyyy-MM-dd_hh:mm")</code>
 }
- | <button @onclick="() => (GivePlus(Id))">+@Score</button>
+&nbsp;<button class="btn-ghost" @onclick="() => (ScoreUp(Id))">+@Score</button>
 </small>
 
 @code {

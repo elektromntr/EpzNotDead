@@ -1,4 +1,7 @@
 using EpzNotDead.Infrastructure.Configuration;
+using EpzNotDead.Infrastructure.Repository;
+using EpzNotDead.Infrastructure.Repository.Interfaces;
+using EpzNotDead.Shared.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +12,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddDbContextPool<EpzNotDeadContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped<IPostService, PostService>();
 
 var app = builder.Build();
 

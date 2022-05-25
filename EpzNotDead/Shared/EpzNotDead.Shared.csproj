@@ -7,10 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <SupportedPlatform Include="browser" />
+    <ProjectReference Include="..\..\EpzNotDead.Infrastructure\EpzNotDead.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
+    <SupportedPlatform Include="browser" />
   </ItemGroup>
 </Project>

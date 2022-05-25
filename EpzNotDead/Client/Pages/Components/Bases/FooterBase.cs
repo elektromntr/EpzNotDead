@@ -24,7 +24,7 @@ namespace EpzNotDead.Client.Pages.Components.Bases
 
         #endregion
 
-        protected async Task GivePlus(Guid id)
+        protected async Task ScoreUp(Guid id)
         {
             Score++;
             await Client.PutAsync($"Articles/ScoreUp/{id}", null);

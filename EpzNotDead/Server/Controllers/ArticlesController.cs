@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using EpzNotDead.Infrastructure.Configuration;
+using EpzNotDead.Infrastructure.Enums;
+using EpzNotDead.Infrastructure.Entities;
+using EpzNotDead.Shared.Services;
 
 namespace EpzNotDead.Server.Controllers
 {
@@ -8,10 +11,13 @@ namespace EpzNotDead.Server.Controllers
     public class ArticlesController : ControllerBase
     {
         private EpzNotDeadContext _db;
+        private IPostService _postService;
 
-        public ArticlesController(EpzNotDeadContext db)
+        public ArticlesController(IPostService postService, 
+            EpzNotDeadContext db)
         {
             _db = db;
+            _postService = postService;
         }
         public IActionResult Index()
         {
@@ -19,13 +25,40 @@ namespace EpzNotDead.Server.Controllers
         }
 
         [HttpGet]
-        [Route("News")]
-        public async Task<ActionResult> GetNews()
+        public async Task<ActionResult> GetArticles() =>
+            await GetArticlesByType(null);
+
+        [HttpGet]
+        [Route("{type}")]
+        public async Task<ActionResult> GetArticlesByType(string? type)
         {
-            var result = _db.Posts.ToList();
+            List<Post> result = new();
+            if (string.IsNullOrWhiteSpace(type))
+            {
+                //result = _db.Posts.Take(6).ToList();
+                result = await _postService
+                    .GetPosts(p => p.Archived != true);
+            }
+            else
+            {
+                Enum.TryParse<PostType>(type, true, out var typeEnum);
+                result = await _postService
+                    .GetPosts(p => p.Type.Equals(typeEnum) 
+                        && p.Archived != true);
+                    
+            }
 
             return Ok(result);
         }
+
+        //[HttpGet]
+        //[Route("Music")]
+        //public async Task<ActionResult> GetMusic()
+        //{
+        //    var result = _db.Posts.ToList();
+
+        //    return Ok(result);
+        //}
 
         [HttpPut]
         [Route("ScoreUp/{id:Guid}")]
