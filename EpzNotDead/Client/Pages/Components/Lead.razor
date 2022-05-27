@@ -7,7 +7,8 @@
 }
 else
 {
-<h1 class="title">@Article.Title</h1>
+    //<a href="/ProductDetails/@item.Id">
+<h1 class="title"><a href="/Post/@Article.Id">@Article.Title</a></h1>
 <Footer Id="@Article.Id" Created="@Article.Created" Edited="@Article?.Edited" Score="@Article.Score"/>
 <p>
     @Article.ShortContent

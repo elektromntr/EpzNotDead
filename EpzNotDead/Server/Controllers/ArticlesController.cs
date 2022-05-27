@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using EpzNotDead.Infrastructure.Configuration;
+﻿using EpzNotDead.Infrastructure.Entities;
 using EpzNotDead.Infrastructure.Enums;
-using EpzNotDead.Infrastructure.Entities;
+using EpzNotDead.Shared.Dtos;
 using EpzNotDead.Shared.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace EpzNotDead.Server.Controllers
 {
@@ -10,13 +10,10 @@ namespace EpzNotDead.Server.Controllers
     [Route("[controller]")]
     public class ArticlesController : ControllerBase
     {
-        private EpzNotDeadContext _db;
         private IPostService _postService;
 
-        public ArticlesController(IPostService postService, 
-            EpzNotDeadContext db)
+        public ArticlesController(IPostService postService)
         {
-            _db = db;
             _postService = postService;
         }
         public IActionResult Index()
@@ -30,7 +27,8 @@ namespace EpzNotDead.Server.Controllers
 
         [HttpGet]
         [Route("{type}")]
-        public async Task<ActionResult> GetArticlesByType(string? type)
+        public async Task<ActionResult> GetArticlesByType(
+            string? type)
         {
             List<Post> result = new();
             if (string.IsNullOrWhiteSpace(type))
@@ -43,22 +41,51 @@ namespace EpzNotDead.Server.Controllers
             {
                 Enum.TryParse<PostType>(type, true, out var typeEnum);
                 result = await _postService
-                    .GetPosts(p => p.Type.Equals(typeEnum) 
+                    .GetPosts(p => p.Type.Equals(typeEnum)
                         && p.Archived != true);
-                    
             }
 
             return Ok(result);
         }
 
-        //[HttpGet]
-        //[Route("Music")]
-        //public async Task<ActionResult> GetMusic()
-        //{
-        //    var result = _db.Posts.ToList();
+        [HttpGet]
+        [Route("{id:Guid}")]
+        public async Task<ActionResult> GetPost(Guid id)
+        {
+            PostDto result = new();
+            result = result.FromPost(await _postService
+                .GetPost(p => p.Id.Equals(id)));
 
-        //    return Ok(result);
-        //}
+            return result is not null
+                ? Ok(result)
+                : NoContent();
+        }
+
+        [HttpGet]
+        [Route("additional-content/{id:Guid}")]
+        public async Task<ActionResult> GetAdditionalContent(Guid id)
+        {
+            List<AdditionalContent> result = new();
+            result = await _postService
+                .GetAdditionalContent(id);
+
+            return result is not null
+                ? Ok(result)
+                : NoContent();
+        }
+
+        [HttpGet]
+        [Route("links/{id:Guid}")]
+        public async Task<ActionResult> GetLinks(Guid id)
+        {
+            List<Link> result = new();
+            result = await _postService
+                .GetLinks(id);
+
+            return result is not null
+                ? Ok(result)
+                : NoContent();
+        }
 
         [HttpPut]
         [Route("ScoreUp/{id:Guid}")]
@@ -66,9 +93,7 @@ namespace EpzNotDead.Server.Controllers
         {
             try
             {
-                var scoring = _db.Posts.FirstOrDefault(n => n.Id.Equals(id));
-                scoring.Score += 1;
-                _ = await _db.SaveChangesAsync();
+                await _postService.ScoreUp(id);
                 return NoContent();
             }
             catch (Exception e)

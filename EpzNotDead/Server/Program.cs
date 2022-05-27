@@ -13,7 +13,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddDbContextPool<EpzNotDeadContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IPostService, PostService>();
 
 var app = builder.Build();

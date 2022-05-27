@@ -1,0 +1,33 @@
+﻿@page "/Post/{Id:guid}"
+@using EpzNotDead.Client.Pages.Components.Bases
+@inherits PostDetailsBase
+
+@if (Post == null && ErrorMessage == null)
+{
+    <p>Loading..</p>
+}
+else if (ErrorMessage != null)
+{
+    <DisplayError ErrorMessage="@ErrorMessage"></DisplayError>
+}
+else
+{
+    <h1>@Post.Title</h1>
+    <p>@Post.Content</p>
+    if (Post.AdditionalContent.Any())
+    {
+        foreach(var ac in Post.AdditionalContent)
+        {
+            <h3>@ac.Name</h3>
+            <p>@ac.Content</p>
+        }
+    }
+    if (Post.Links.Any())
+    {
+        foreach(var l in Post.Links)
+        {
+            <b>@l.Title</b> <span>--<a href="@l.Url">@l.Url</a></span>
+            <br />
+        }
+    }
+}

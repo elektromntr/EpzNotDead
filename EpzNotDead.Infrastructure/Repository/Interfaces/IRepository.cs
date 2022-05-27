@@ -17,9 +17,9 @@ namespace EpzNotDead.Infrastructure.Repository.Interfaces
 		Task Delete(object id);
 		void Delete(TEntity entityToDelete);
 		void Update(TEntity entityToUpdate);
-		void SaveChanges();
+		void SaveChangesSync();
 		Task AddRange(IEnumerable<TEntity> entities);
 		void DeleteRange(IEnumerable<TEntity> entitiesToDelete);
 		Task SaveChangesAsync();
-	}
+    }
 }
