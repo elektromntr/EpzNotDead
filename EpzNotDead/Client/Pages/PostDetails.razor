@@ -12,22 +12,27 @@ else if (ErrorMessage != null)
 }
 else
 {
-    <h1>@Post.Title</h1>
+    <b>@Post.Title</b>
     <p>@Post.Content</p>
     if (Post.AdditionalContent.Any())
     {
         foreach(var ac in Post.AdditionalContent)
         {
-            <h3>@ac.Name</h3>
+            <b>@ac.Name</b>
             <p>@ac.Content</p>
         }
     }
     if (Post.Links.Any())
     {
-        foreach(var l in Post.Links)
-        {
-            <b>@l.Title</b> <span>--<a href="@l.Url">@l.Url</a></span>
-            <br />
-        }
+        <div class="terminal-card">
+            <header>Linki</header>
+            <div>
+                @foreach(var link in Post.Links)
+                {
+                    <b>@link.Title</b> <span>--<a href="@link.Url">@link.Url</a></span>
+                    <br />
+                }
+            </div>
+        </div>
     }
 }
