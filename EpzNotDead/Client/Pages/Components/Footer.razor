@@ -1,4 +1,5 @@
 ﻿@using EpzNotDead.Client.Pages.Components.Bases
+@using EpzNotDead.Shared.Dtos
 @inherits FooterBase
 
 <small>
@@ -10,9 +11,17 @@ else
 {
     <code>Wrzucone: @Created.ToString("yyyy-MM-dd_hh:mm")</code>
 }
-&nbsp;<button class="btn-ghost" @onclick="() => (ScoreUp(Id))">+@Score</button>
+&nbsp;
+    <button 
+        class="btn-ghost" 
+        @onmouseover="() => (PassDescriptionToEpzToolTip(Id,
+        StateServices.DescriptionSubject.ScoreUp))"
+        @onmouseout="() => ClearDescription(Id)"
+        @onclick="() => (ScoreUp(Id))">+@Score
+    </button>
 </small>
+<br/>
+    <EpzToolTip Id="@Id"/>
 
 @code {
-    
 }

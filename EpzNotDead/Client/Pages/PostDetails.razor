@@ -1,5 +1,6 @@
 ﻿@page "/Post/{Id:guid}"
 @using EpzNotDead.Client.Pages.Components.Bases
+@using EpzNotDead.Client.Pages.Components
 @inherits PostDetailsBase
 
 @if (Post == null && ErrorMessage == null)
@@ -13,6 +14,8 @@ else if (ErrorMessage != null)
 else
 {
     <b>@Post.Title</b>
+    <br /><Footer Id="@Post.Id" Created="@Post.Created" Edited="@Post?.Edited" Score="@Post.Score"/>
+    <hr />
     <p>@Post.Content</p>
     if (Post.AdditionalContent.Any())
     {

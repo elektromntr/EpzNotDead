@@ -20,6 +20,7 @@ namespace EpzNotDead.Client.Pages.Components.Bases
         protected override async Task OnInitializedAsync()
         {
             Post = await Http.GetFromJsonAsync<PostDto>($"Articles/{Id}");
+            Http.PutAsync($"Articles/ScoreUp/{Id}", null);
         }
     }
 }
